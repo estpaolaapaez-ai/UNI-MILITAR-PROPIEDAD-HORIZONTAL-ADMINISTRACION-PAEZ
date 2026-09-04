@@ -1,68 +1,75 @@
-# Administración de Propiedad Horizontal (PH) y Rentas Cortas: Análisis de Datos y Cumplimiento Normativo
+## Hipótesis 1
 
-## 1. Definición del Problema (Árbol de Problemas)
-**Problema Central:** Incremento de la exposición fiduciaria y legal en la administración de propiedades horizontales con destinación turística mixta, derivado del incumplimiento normativo, brechas de privacidad y fallas en el debido proceso.
+### Tablero de priorización
 
-**Causas Directas:**
-* **Causa 1:** Informalidad operativa por omisión del Registro Nacional de Turismo (RNT) y del Reglamento de Propiedad Horizontal (RPH).
-* **Causa 2:** Brecha de privacidad en portería por recopilación de datos sensibles (biometría) sin autorización expresa de Habeas Data y ausencia de avisos de videovigilancia.
-* **Causa 3:** Alta litigiosidad por imposición de sanciones de convivencia sin soporte técnico (sonómetros) o cumplimiento de etapas de debido proceso.
+| Causa | Fase DT origen (E/D/I) | Insight de empatía | Supuesto central | Pregunta analítica | Variables (nombres exactos) | Tipo (Outcome / Explic / Control / Segmento) | Cálculo / Transformación | Métrica (nombre + fórmula) | SIII | Patrón esperado (si cierta) | Condición refutación | Valor esperado para usuario/ciudadano | Riesgo si falsa | Acción si confirma | Acción si refuta | Experimento analítico mínimo (query + visual 1 línea) | Estado (V/A/R) |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| Operación de unidades privadas evadiendo el Registro Nacional de Turismo (RNT) y el Reglamento de Propiedad Horizontal (RPH). | Empatizar: Mapeo de empatía del Administrador frente al pánico de la responsabilidad civil y multas fiduciarias. | El 79% de los administradores descubre el alquiler clandestino solo cuando ve huéspedes con maletas en la portería física sin RNT ni reportes previos, enfrentando pánico por responsabilidad civil y multas fiduciarias. | Si los administradores de PH residencial implementan un módulo de validación automática integrado a la portería que verifique la vigencia del RNT del inmueble y su estado de paz y salvo antes del pre-registro de huéspedes, se reducirá la informalidad de rentas cortas y se blindará la responsabilidad civil. | ¿Cómo impacta la validación automatizada previa del RNT en la tasa de ingresos de turistas no autorizados y en el volumen de reservas irregulares registradas por mes? | 1. tasa_ingreso_no_autorizado<br>2. integracion_sap_refx<br>3. estado_rnt<br>4. paz_salvo_propietario<br>5. unidad_privada<br>6. id_anfitrion<br>7. fecha_ingreso_reserva<br>8. coeficiente_copropiedad | 1. tasa_ingreso_no_autorizado — Outcome<br>2. integracion_sap_refx — Explicativa<br>3. estado_rnt — Control<br>4. paz_salvo_propietario — Control<br>5. unidad_privada — Segmento<br>6. id_anfitrion — Segmento<br>7. fecha_ingreso_reserva — Control<br>8. coeficiente_copropiedad — Control | | `tasa_ingreso_no_autorizado = (huespedes_sin_preregistro / total_huespedes_mes) * 100` | | `≥40%` | **Si la tasa de ingreso no autorizado se mantiene en ≥ 40% tras la implantación, el supuesto se declara refutado (los infractores evaden el registro haciendo pasar a los huéspedes como familiares en portería).** | Garantizar la seguridad de la copropiedad, evitar la sobreexplotación de zonas comunes y asegurar que solo operen alquileres formales que pagan manillas y respetan las normas comunes. | Mantener el descontrol y la clandestinidad, incrementando el riesgo de multas de hasta 3 SMMLV para el administrador y afectando la convivencia por sobrecupo. | Protocolizar la obligatoriedad de la validación previa digital en el reglamento interno y exigir el cruce de RNT como requisito estatutario de control de acceso. | Fortalecer las auditorías físicas aleatorias de parentesco en portería y sancionar drásticamente a los residentes que registren falsamente a huéspedes como familiares. | Habilitar en una portería piloto (14 días) el cruce en tiempo real entre el estado de reserva, RNT y paz y salvo, usando logs de pre-registro y libro de minutas. Gráfico de línea semanal midiendo % de reservas validadas (Meta: 95%, Umbral refutación: 70%). | |
 
----
+### Ficha de Indicador
 
-## 2. Hipótesis y Preguntas Analíticas
+| Supuesto central | ¿QUÉ HAGO? (Acción) | ¿CÓMO LO HAGO? (Método) | ¿PARA QUÉ LO HAGO? (Propósito) | Aspecto específico a Medir | Público objetivo (Para quién): | Dimensión (Marca una) | Nombre del indicador | Numerador (Variable Y) | Denominador (Población) | Fórmula (Matemática) | Prueba de estrés | Tipo (Marca una) | Frecuencia de medición | Fuente de datos (Verificación) | Línea base (Patrón actual) | Patrón esperado (Meta) | Condición de refutación (Fallo). Es el número que te dice que tu idea no funcionó. |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| Asumimos que si los administradores de PH residencial implementan un módulo de validación automática integrado a la portería que verifique la vigencia del RNT del inmueble y su estado de paz y salvo antes de permitir el pre-registro de huéspedes, se reducirá la informalidad de rentas cortas en un 80% y se blindará la responsabilidad civil del administrador. | Habilitar una pasarela de pre-registro digital obligatoria previa a la llegada de huéspedes. | El anfitrión registra la reserva en el módulo SAP RE-FX; el sistema valida el RNT automáticamente y el estado contable de cartera en tiempo real. Si ambos están conformes, emite un código QR temporal de acceso. | Evitar el ingreso de huéspedes clandestinos de apartamentos informales o morosos, eximiendo al administrador de multas fiduciarias de hasta 3 SMMLV por omitir el deber de reportar la informalidad. | Proporción de ingresos de huéspedes que han completado satisfactoriamente el pre-registro y la validación automática del RNT. | Propietarios anfitriones y operadores de rentas de corto plazo que utilizan plataformas de alojamiento (Airbnb/Booking). | Eficacia Operativa y de Control Jurídico. | **Tasa de Validación Previa de Vivienda Turística (TVP-VT).** | Huéspedes ingresados sin pre-registro o RNT vigente | huéspedes turísticos ingresados en el mes | `(Huéspedes ingresados sin pre-registro o RNT vigente / Total de huéspedes turísticos ingresados en el mes)` | Caída general del servidor central de Confecámaras o interrupción de la API de validación con el MinCIT, obligando a los vigilantes a registrar de forma manual por contingencia, incrementando los falsos negativos. | Tasa (Porcentaje) | Quincenal: Dos veces al mes. | Logs de transacciones y pre-registros del módulo SAP RE-FX de portería cruzados con la base de datos nacional del RNT. | 0.3556 | 0.0604 | **0.2667** |
 
-### Hipótesis 1: Control de Rentas Cortas (RNT)
-* **Supuesto:** Si los administradores de PH implementan un módulo de validación automática integrado a la portería que verifique la vigencia del RNT y el estado de paz y salvo antes del pre-registro, se reducirá la informalidad de rentas cortas y se blindará la responsabilidad civil.
-* **Pregunta Analítica:** ¿Cómo impacta la validación automatizada previa del RNT en la tasa de ingresos de turistas no autorizados por mes?
-* **Métrica:** `Tasa_Ingreso_No_Autorizado = (huespedes_sin_preregistro / total_huespedes_mes) * 100`
+## Hipótesis 2
 
-**Clasificación de Variables:**
-| Variable (Estandarizada) | Tipo de Variable |
-| :--- | :--- |
-| `tasa_ingreso_no_autorizado` | Outcome |
-| `integracion_sap_refx` | Explicativa |
-| `estado_rnt` | Control |
-| `paz_salvo_propietario` | Control |
-| `unidad_privada` | Segmento |
-| `id_anfitrion` | Segmento |
+### Tablero de priorización
 
-### Hipótesis 2: Habeas Data y Privacidad
-* **Supuesto:** Si la administración sustituye la biometría dactilar obligatoria por un pre-registro digital con aceptación previa de Habeas Data (código QR), se mitigará el riesgo de multas de la SIC y mejorará la trazabilidad.
-* **Pregunta Analítica:** ¿Cómo influye el uso del pre-registro con aceptación previa de Habeas Data por QR en el índice de cumplimiento legal en portería?
-* **Métrica:** `Indice_Cumplimiento_Privacidad = (ingresos_habeas_data_firmado / total_ingresos_mes) * 100`
+| Causa | Fase DT origen (E/D/I) | Insight de empatía | Supuesto central | Pregunta analítica | Variables (nombres exactos) | Tipo (Outcome / Explic / Control / Segmento) | Cálculo / Transformación | Métrica (nombre + fórmula) | SIII | Patrón esperado (si cierta) | Condición refutación | Valor esperado para usuario/ciudadano | Riesgo si falsa | Acción si confirma | Acción si refuta | Experimento analítico mínimo (query + visual 1 línea) | Estado (V/A/R) |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| Recopilación de datos sensibles (biometría dactilar) en portería sin autorización expresa de Habeas Data y ausencia de avisos de videovigilancia. | Ideación y Prototipado: Diseño de un pre-registro digital con firma electrónica de Habeas Data que emite un código QR temporal de acceso al huésped. | El 85% de los residentes se siente incómodo entregando su huella dactilar obligatoria a empresas de seguridad privada en portería sin firmar políticas de Habeas Data. | Si la administración suprime el uso de biometría dactilar obligatoria para turistas y la reemplaza por un pre-registro digital con aceptación previa de Habeas Data (código QR temporal), se mitigará el riesgo de multas SIC y mejorará la trazabilidad. | ¿Cómo influye la supresión de la biometría obligatoria y el uso del pre-registro QR en el índice de cumplimiento de Habeas Data ante la SIC y en el tiempo de registro en portería? | 1. indice_cumplimiento_habeas_data<br>2. flujo_consentimiento_digital<br>3. tipo_mecanismo_autenticacion<br>4. tiempo_registro_porteria_seg<br>5. tipo_visitante<br>6. id_visitante<br>7. id_copropiedad<br>8. fecha_registro_acceso | 1. indice_cumplimiento_habeas_data — Outcome<br>2. flujo_consentimiento_digital — Explicativa<br>3. tipo_mecanismo_autenticacion — Control<br>4. tiempo_registro_porteria_seg — Outcome Secundario<br>5. tipo_visitante — Segmento<br>6. id_visitante — Segmento<br>7. id_copropiedad — Segmento<br>8. fecha_registro_acceso — Control | | `indice_cumplimiento_habeas_data = (ingresos_habeas_data_qr_firmado / total_ingresos_mes) * 100` | | `≤80%` | **Si el índice de cumplimiento se mantiene por debajo del 80% tras 3 semanas, se declara refutado (vigilantes siguen registrando manualmente evadiendo el sistema).** | Garantizar el derecho constitucional al Habeas Data, proteger sus datos personales y agilizar su ingreso reduciendo las colas en recepción. | Enfrentar investigaciones formales de la SIC y multas de hasta 2.000 SMLMV por recolectar datos biométricos de forma coactiva. | Suprimir de forma definitiva los lectores biométricos de huella dactilar para visitantes y protocolizar el uso de pre-registro QR en la copropiedad. | Sancionar disciplinariamente a la empresa de seguridad privada por desacato al protocolo de control de acceso digital y capacitar obligatoriamente a los vigilantes. | Sustituir en portería principal (14 días) la biometría por QR con aceptación Habeas Data. Monitoreo mediante BD web-app y lector QR. Gráfico de barras midiendo Tasa de Registro Legal de Visitantes (Meta: 100%, Umbral: 90%). | |
 
-**Clasificación de Variables:**
-| Variable (Estandarizada) | Tipo de Variable |
-| :--- | :--- |
-| `indice_cumplimiento_habeas_data` | Outcome |
-| `flujo_consentimiento_digital` | Explicativa |
-| `tipo_mecanismo_autenticacion` | Control |
-| `tipo_visitante` | Segmento |
+### Ficha de Indicador
 
-### Hipótesis 3: Litigiosidad y Convivencia
-* **Supuesto:** Si la administración apoya sus procesos sancionatorios en mediciones técnicas (sonómetros certificados) y agota el debido proceso, se reducirá la impugnación de sanciones.
-* **Pregunta Analítica:** ¿Cómo influye el uso de sonómetros certificados en la tasa de multas revocadas judicialmente?
-* **Métrica:** `Indice_Resolutividad = (multas_ratificadas_debido_proceso / total_sanciones_impuestas) * 100`
+| Supuesto central | ¿QUÉ HAGO? (Acción) | ¿CÓMO LO HAGO? (Método) | ¿PARA QUÉ LO HAGO? (Propósito) | Aspecto específico a Medir | Público objetivo (Para quién): | Dimensión (Marca una) | Nombre del indicador | Numerador (Variable Y) | Denominador (Población) | Fórmula (Matemática) | Prueba de estrés | Tipo (Marca una) | Frecuencia de medición | Fuente de datos (Verificación) | Línea base (Patrón actual) | Patrón esperado (Meta) | Condición de refutación (Fallo). Es el número que te dice que tu idea no funcionó. |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| Asumimos que si la administración suprime el uso de biometría dactilar obligatoria para el ingreso de turistas y la reemplaza por un flujo de pre-registro digital con aceptación previa de la política de privacidad (Habeas Data) que genere códigos QR temporales de acceso, se reducirá a cero el riesgo de multas de la Superintendencia de Industria y Comercio (SIC) y se mejorará en un 95% la trazabilidad de los visitantes. | Diseñar e implementar un flujo de consentimiento digital de la Ley 1581 (Habeas Data) previo al acceso físico. | El huésped recibe un enlace SMS/correo para aceptar de forma expresa la política de privacidad antes de que se habilite su QR temporal para el ingreso. | Eliminar el almacenamiento ilegal de datos biométricos obligatorios en portería que expone a la copropiedad a multas de hasta 2.000 SMLMV por parte de la SIC. | Proporción de visitantes que cuentan con el consentimiento previo firmado digitalmente de Habeas Data en el servidor. | Residentes permanentes, huéspedes turísticos y visitantes ocasionales que ingresan por portería. | Eficacia Jurídica (Cumplimiento Regulatorio SIC). | **Índice de Cumplimiento de Registro de Privacidad (ICRP).** | Ingresos turísticos con Habeas Data QR firmado | ingresos turísticos registrados en el mes | `(Ingresos turísticos con Habeas Data QR firmado / Total de ingresos turísticos registrados en el mes) * 100` | Llegada masiva de un bus turístico de 15 personas sin plan de datos en sus celulares para abrir el enlace de consentimiento digital, lo que colapsa la portería y obliga al vigilante a saltarse el sistema. | Índice (Porcentaje) | Semanal: Una vez por semana. | Auditorías de bases de datos del sistema de control de acceso cruzadas con las bitácoras de firmas. | 1 | 1 | **0.85** |
 
-**Clasificación de Variables:**
-| Variable (Estandarizada) | Tipo de Variable |
-| :--- | :--- |
-| `tasa_impugnacion_sanciones` | Outcome |
-| `registro_sonometro_db` | Explicativa |
-| `cumplimiento_debido_proceso` | Control |
-| `unidad_infractora` | Segmento |
+## Hipótesis 3
 
----
+### Tablero de priorización
 
-## 3. Estructura de la Base de Datos (Modelo Semántico)
+| Causa | Fase DT origen (E/D/I) | Insight de empatía | Supuesto central | Pregunta analítica | Variables (nombres exactos) | Tipo (Outcome / Explic / Control / Segmento) | Cálculo / Transformación | Métrica (nombre + fórmula) | SIII | Patrón esperado (si cierta) | Condición refutación | Valor esperado para usuario/ciudadano | Riesgo si falsa | Acción si confirma | Acción si refuta | Experimento analítico mínimo (query + visual 1 línea) | Estado (V/A/R) |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| Imposición de sanciones pecuniarias de convivencia sin soporte técnico (sonómetros homologados) o cumplimiento de etapas de debido proceso fiduciario. | Definición y Evaluación: Fortalecimiento del debido proceso fiduciario mediante descargos obligatorios y el uso de sonómetros homologados por la administración. | El 73% de las multas impuestas a anfitriones por ruido son impugnadas y revocadas debido a fallas en el debido proceso o falta de pruebas técnicas. | Si la administración apoya sus procesos sancionatorios en mediciones técnicas de decibeles con sonómetros certificados (ONAC) y agota el debido proceso, se reducirá la impugnación de sanciones. | ¿Cómo influye el uso de sonómetros certificados y la profesionalización del administrador (RUAPH) en la tasa de multas revocadas judicialmente? | 1. tasa_impugnacion_sanciones<br>2. nivel_acreditacion_admin<br>3. registro_sonometro_db<br>4. nivel_ruido_registrado_db<br>5. cumplimiento_debido_proceso<br>6. unidad_infractora<br>7. id_mediador_comite | 1. tasa_impugnacion_sanciones — Outcome<br>2. nivel_acreditacion_admin — Explicativa<br>3. registro_sonometro_db — Explicativa<br>4. nivel_ruido_registrado_db — Control<br>5. cumplimiento_debido_proceso — Control<br>6. unidad_infractora — Segmento<br>7. id_mediador_comite — Segmento | | `indice_resolutividad_conflictos = (multas_ratificadas_debido_proceso / total_sanciones_impuestas) * 100` | | `≤40%` | **Si el índice de resolutividad se mantiene < 40% tras 6 semanas, indica que asamblea aprueba manuales ilegales o tribunales consideran multas violatorias.** | Garantizar la tranquilidad acústica (65 db de día y 55 db de noche según la Res. 627) y asegurar que las sanciones de convivencia sean justas, legales y no arbitrarias. | Enfrentar demandas por daño moral, pérdida de credibilidad de la administración y un incremento en la morosidad por multas incobrables. | Adquirir un sonómetro certificado por la ONAC y capacitar al personal de vigilancia en la medición objetiva del ruido como protocolo vinculante. | Rediseñar el manual de convivencia en una asamblea extraordinaria con quórum calificado del 70% de coeficientes para adaptarlo a la Sentencia T-199 de 2026. | Aplicar sobre querellas de ruido (90 días) protocolo de sonómetro ONAC y etapa de descargos. Análisis sobre actas del Consejo y tutelas. Gráfico de línea con Tasa de Impugnación (Meta: 2% litigiosidad, Umbral: 15%). | |
 
-Para la correcta visualización e ingesta en Power BI, la base de datos cruda de las encuestas está estructurada como una Tabla de Hechos (Fact Table) plana, garantizando una columna de marca temporal (`zona_extraccion_id`) para modelado de inteligencia de tiempo y estandarizando las respuestas nulas como `N/A`.
+### Ficha de Indicador
 
-**Muestra Estructural de la Base de Datos (Primeros Registros):**
+| Supuesto central | ¿QUÉ HAGO? (Acción) | ¿CÓMO LO HAGO? (Método) | ¿PARA QUÉ LO HAGO? (Propósito) | Aspecto específico a Medir | Público objetivo (Para quién): | Dimensión (Marca una) | Nombre del indicador | Numerador (Variable Y) | Denominador (Población) | Fórmula (Matemática) | Prueba de estrés | Tipo (Marca una) | Frecuencia de medición | Fuente de datos (Verificación) | Línea base (Patrón actual) | Patrón esperado (Meta) | Condición de refutación (Fallo). Es el número que te dice que tu idea no funcionó. |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| Asumimos que si la administración es ejercida por un profesional calificado e inscrito en el RUAPH (con formación tecnológica en turismo) que apoye sus procesos en mediciones técnicas con sonómetros certificados por la ONAC y agote todas las etapas del debido proceso, se reducirá en un 90% la impugnación de sanciones. | Profesionalizar la gestión de convivencia del administrador de acuerdo con la nueva ley de PH de 2026. | El administrador atiende quejas por ruidos mediante mediciones con sonómetros certificados bajo la resolución 627, enviando notificaciones de descargos previas antes de aplicar sanciones pecuniarias. | Asegurar que las multas de convivencia cumplan estrictamente el debido proceso, evitando su revocación en tribunales civiles mediante acciones de tutela (conforme a la Sentencia T-199 de 2026). | Proporción de sanciones pecuniarias por ruido que quedan en firme y son cobradas legalmente por no poder ser impugnadas por el infractor. | Residentes perturbados y propietarios anfitriones reincidentes en ruidos molestos. | Eficacia Administrativa y Coercitiva. | **Índice de Resolutividad de Conflictos de Convivencia (IRCC).** | Multas ratificadas y pagadas que cumplieron debido proceso | sanciones pecuniarias impuestas en el periodo | `(Multas ratificadas y pagadas que cumplieron debido proceso / Total de sanciones pecuniarias impuestas en el periodo) * 100` | Impugnaciones de propietarios infractores argumentando que las grabaciones de CCTV del pasillo violan su intimidad domiciliar según el Decreto 768 de 2025, inhabilitando las pruebas ante el inspector de policía. | Índice (Porcentaje) | Semestral: Dos veces al año en cierres de asamblea. | Libro oficial de actas de sanciones del Consejo de Administración cruzado con estados de cuenta de cartera morosa. | 0.6 | 0.8 | **0.4** |
 
-| zona_extraccion_id | id_encuestado | tipo_actor | p01_rnt_activo | p04_biometria_obligatoria | p05_firma_habeas_data | p09_percepcion_sanciones |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| 2026-09-01 08:15:22 | E001 | Residente | N/A | Sí, es obligatorio | No, nunca ha firmado | Sí, percepción subjetiva |
-| 2026-09-01 09:30:10 | E002 | Anfitrión | Sí, activo y visible | No, hay alternativa | Sí, ha firmado | N/A |
-| 2026-09-01 10:45:00 | E003 | Administrador | N/A | Sí, es obligatorio | No, nunca ha firmado | No, usa pruebas técnicas |
+## Ficha Técnica de Recolección de Datos (Encuestas)
+
+Se ejecutó un levantamiento de datos primarios con 149 participantes activos del ecosistema de Propiedad Horizontal, logrando validez estadística para la investigación.
+
+- Residentes Permanentes: 80 participantes (53.6%)
+- Anfitriones de Rentas Cortas: 45 participantes (30.2%)
+- Administradores Generales: 24 participantes (16.1%)
+
+**Hallazgos Estadísticos Críticos (Exposición Legal):**
+
+- El 64% (29 de 45) de los anfitriones opera sin que el RPH de su conjunto lo autorice, exponiendo a multas y bloqueos de plataformas.
+- El 79% (19 de 24) de los administradores detecta unidades clandestinas.
+- El 85% (68 de 80) de los residentes reporta que la biometría es obligatoria sin alternativa.
+- El 93.9% (140 de 149) afirma nunca haber firmado políticas de Habeas Data en portería (Violación Ley 1581).
+- El 87.5% (70 de 80) de los residentes percibe que las multas por ruido son subjetivas y carecen de pruebas técnicas (sonometría).
+
+## Arquitectura del Modelo de Datos para Power BI (Metodología ETL)
+
+Para garantizar la ingesta correcta en Power BI (Power Query) y evitar errores de modelado multidimensional (Esquema Estrella), la base de datos se transforma de resumen estadístico a una Tabla de Hechos (Fact Table) granular.
+
+**Estructura y Reglas de la Tabla de Hechos (Cruda):**
+
+- Granularidad: 1 fila = 1 encuestado.
+- `zona_extraccion_id`: Marca temporal obligatoria (Timestamp) para inteligencia de tiempo en DAX.
+- Limpieza de Nulos: Las preguntas de bifurcación (ej. exclusivas para administradores) se estandarizan con valor `N/A` en perfiles no aplicables.
+
+**Muestra de Columnas en BD Estandarizada:**
+
+| zona_extraccion_id | id_encuestado | tipo_actor | p01_rnt_activo | p03_unidades_clandestinas | p04_biometria_obligatoria | p05_firma_habeas_data | p08_debido_proceso | p09_sancion_subjetiva |
+|---|---|---|---|---|---|---|---|---|
+| 2026-09-01 08:15 | E001 | Residente | N/A | N/A | Sí, es obligatorio | No, nunca firmado | N/A | Sí, percepción subjetiva |
+| 2026-09-01 09:30 | E002 | Anfitrión | Sí, activo | N/A | No, hay alternativa | Sí, ha firmado | No, impugnadas | N/A |
+| 2026-09-01 10:45 | E003 | Administrador | N/A | Sí, detectadas | Sí, es obligatorio | No, nunca firmado | N/A | N/A |
