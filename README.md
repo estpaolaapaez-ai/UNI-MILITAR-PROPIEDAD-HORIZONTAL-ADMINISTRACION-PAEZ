@@ -34,42 +34,10 @@
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
 | Imposición de sanciones pecuniarias de convivencia sin soporte técnico (sonómetros homologados) o cumplimiento de etapas de debido proceso fiduciario. | Definición y Evaluación (Fortalecimiento del debido proceso fiduciario). | El 73% de las multas por ruido son impugnadas y tumbadas con éxito debido a fallas procedimentales. | Si la administración apoya sus procesos en mediciones con sonómetros certificados (ONAC) y agota el debido proceso, se reducirá la impugnación de sanciones. | ¿Cómo influye el uso de sonómetros certificados en la tasa de multas revocadas judicialmente? | 1. tasa_impugnacion_sanciones<br>2. nivel_acreditacion_admin<br>3. registro_sonometro_db<br>4. nivel_ruido_registrado_db<br>5. cumplimiento_debido_proceso<br>6. unidad_infractora<br>7. id_mediador_comite | 1. tasa_impugnacion_sanciones — Outcome<br>2. nivel_acreditacion_admin — Explicativa<br>3. registro_sonometro_db — Explicativa<br>4. nivel_ruido_registrado_db — Control<br>5. cumplimiento_debido_proceso — Control<br>6. unidad_infractora — Segmento<br>7. id_mediador_comite — Segmento | | `indice_resolutividad = DIVIDE(CALCULATE(COUNT('FactSanciones'[id_multa]), 'FactSanciones'[cumplimiento_debido_proceso] = "Sí"), COUNT('FactSanciones'[id_multa]), 0)` | Dispositivos Sonómetros y Libro de Actas del Comité de Convivencia. | `≥85%` | **Si el índice de resolutividad se mantiene por debajo del 40% tras seis semanas.** | Garantizar tranquilidad acústica (65 db día / 55 db noche Res. 627) y sanciones justas. | Demandas por daño moral, pérdida de credibilidad y aumento de morosidad. | Adquirir sonómetro certificado ONAC y capacitar en medición objetiva. | Rediseñar el manual de convivencia en asamblea extraordinaria para adaptarlo a la Sentencia T-199. | Aplicar a querellas por ruido (90 días) protocolo ONAC y descargos. Gráfico de línea con Tasa de Impugnación (Meta: 2%). | A (Activa / En Análisis) |
 
-### Ficha de Indicador
+# Ficha de Indicador - Proyecto Paola Alejandra Paez Meza
 
-| Supuesto central | ¿QUÉ HAGO? (Acción) | ¿CÓMO LO HAGO? (Método) | ¿PARA QUÉ LO HAGO? (Propósito) | Aspecto específico a Medir | Público objetivo (Para quién): | Dimensión (Marca una) | Nombre del indicador | Numerador (Variable Y) | Denominador (Población) | Fórmula (Matemática) | Prueba de estrés | Tipo (Marca una) | Frecuencia de medición | Fuente de datos (Verificación) | Línea base (Patrón actual) | Patrón esperado (Meta) | Condición de refutación (Fallo). Es el número que te dice que tu idea no funcionó. |
-|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| Si la administración apoya sus procesos en mediciones con sonómetros certificados (ONAC) y agota el debido proceso, se reducirá la impugnación de sanciones. | Profesionalizar la gestión de convivencia del administrador de acuerdo con la nueva ley de PH de 2026. | El administrador atiende quejas por ruidos mediante mediciones con sonómetros certificados bajo la resolución 627, enviando notificaciones de descargos previas antes de aplicar sanciones pecuniarias. | Asegurar que las multas de convivencia cumplan estrictamente el debido proceso, evitando su revocación en tribunales civiles mediante acciones de tutela (conforme a la Sentencia T-199 de 2026). | ¿Qué efectividad tienen las multas impuestas por ruido al estar respaldadas por pruebas técnicas y debido proceso? | Residentes perturbados y propietarios anfitriones reincidentes en ruidos molestos. | Eficacia Administrativa y Coercitiva. | **`indice_resolutividad_conflictos`** | Recuento de `id_multa` donde `cumplimiento_debido_proceso` = "Sí" (Multas ratificadas y no revocadas). | Recuento total de `id_multa` (sanciones impuestas). | `DIVIDE(CALCULATE(COUNT('FactSanciones'[id_multa]), 'FactSanciones'[cumplimiento_debido_proceso] = "Sí"), COUNT('FactSanciones'[id_multa]), 0)` | Impugnaciones de propietarios infractores argumentando que las grabaciones de CCTV del pasillo violan su intimidad domiciliar según el Decreto 768 de 2025, inhabilitando las pruebas ante el inspector de policía. | Porcentaje (%) — Sentido: Maximizar (entre más alto, mejor). | Semestral: Dos veces al año en cierres de asamblea. | Libro oficial de actas de sanciones del Consejo de Administración cruzado con estados de cuenta de cartera morosa. | 27% (El 73% de las multas actuales se caen por fallas probatorias). | `≥85%` | **`≤40%`** |
-
-## Ficha Técnica de Recolección de Datos (Encuestas)
-
-Se ejecutó un levantamiento de datos primarios con 149 participantes activos del ecosistema de Propiedad Horizontal, logrando validez estadística para la investigación.
-
-- Residentes Permanentes: 80 participantes (53.6%)
-- Anfitriones de Rentas Cortas: 45 participantes (30.2%)
-- Administradores Generales: 24 participantes (16.1%)
-
-**Hallazgos Estadísticos Críticos (Exposición Legal):**
-
-- El 64% (29 de 45) de los anfitriones opera sin que el RPH de su conjunto lo autorice, exponiendo a multas y bloqueos de plataformas.
-- El 79% (19 de 24) de los administradores detecta unidades clandestinas.
-- El 85% (68 de 80) de los residentes reporta que la biometría es obligatoria sin alternativa.
-- El 93.9% (140 de 149) afirma nunca haber firmado políticas de Habeas Data en portería (Violación Ley 1581).
-- El 87.5% (70 de 80) de los residentes percibe que las multas por ruido son subjetivas y carecen de pruebas técnicas (sonometría).
-
-## Arquitectura del Modelo de Datos para Power BI (Metodología ETL)
-
-Para garantizar la ingesta correcta en Power BI (Power Query) y evitar errores de modelado multidimensional (Esquema Estrella), la base de datos se transforma de resumen estadístico a una Tabla de Hechos (Fact Table) granular.
-
-**Estructura y Reglas de la Tabla de Hechos (Cruda):**
-
-- Granularidad: 1 fila = 1 encuestado.
-- `zona_extraccion_id`: Marca temporal obligatoria (Timestamp) para inteligencia de tiempo en DAX.
-- Limpieza de Nulos: Las preguntas de bifurcación (ej. exclusivas para administradores) se estandarizan con valor `N/A` en perfiles no aplicables.
-
-**Muestra de Columnas en BD Estandarizada:**
-
-| zona_extraccion_id | id_encuestado | tipo_actor | p01_rnt_activo | p03_unidades_clandestinas | p04_biometria_obligatoria | p05_firma_habeas_data | p08_debido_proceso | p09_sancion_subjetiva |
-|---|---|---|---|---|---|---|---|---|
-| 2026-09-01 08:15 | E001 | Residente | N/A | N/A | Sí, es obligatorio | No, nunca firmado | N/A | Sí, percepción subjetiva |
-| 2026-09-01 09:30 | E002 | Anfitrión | Sí, activo | N/A | No, hay alternativa | Sí, ha firmado | No, impugnadas | N/A |
-| 2026-09-01 10:45 | E003 | Administrador | N/A | Sí, detectadas | Sí, es obligatorio | No, nunca firmado | N/A | N/A |
+| Supuesto / Causa | Nombre del Indicador (Col H) | Fórmula (Col K) | Tipo de Variable (Col G) | Fuente de Datos (Col O) | M (Usuario Final - Confirmación) | N (Usuario Final - Refutación) | O (Acción - Confirmación) | P (Acción - Refutación) | Patrón Esperado (Col P/Q) | Refutación (Col R) |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| **Supuesto 1** | KPI_Eficiencia_Operativa | (Total_Tareas_Completadas / Total_Tareas_Asignadas) * 100 | Indicador KPI (Resultado / Outcome) | Base de datos corporativa | Los usuarios finales perciben un proceso ágil y sin cuellos de botella operativos en sus tiempos de entrega. | Los usuarios finales reportan retrasos tangibles y acumulación de tareas en su carga laboral. | Escalar el modelo actual a otros departamentos. | Modificar inmediatamente los tiempos de asignación de tareas. | >= 85% | <= 84.9% |
+| **Supuesto 2** | Variable_Carga_Laboral | (Horas_Extra_Trabajadas / Horas_Laborales_Normales) * 100 | Explicativa | Base de datos corporativa | Los empleados disfrutan de un equilibrio sano entre vida laboral y personal, evidenciado en la salida a tiempo. | Los empleados manifiestan agotamiento por la extensión constante de su jornada laboral regular. | Mantener las políticas de horarios establecidas. | Contratar personal de apoyo o redistribuir cargas en 48 horas. | <= 15% | >= 15.1% |
+| **Supuesto 3** | Variable_Tasa_Errores | (Total_Errores_Reportados / Total_Entregables) * 100 | Explicativa | Base de datos corporativa | Los clientes reciben productos/servicios con alta precisión, generando una percepción de calidad superior. | Los clientes experimentan frustración por devoluciones o reprocesos en los entregables. | Implementar un programa de recompensas por calidad. | Detener la línea de producción/servicio para reentrenamiento urgente. | <= 5% | >= 5.1% |
