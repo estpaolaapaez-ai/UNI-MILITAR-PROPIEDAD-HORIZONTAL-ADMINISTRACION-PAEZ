@@ -42,7 +42,6 @@
 | **Supuesto 2** | Variable_Carga_Laboral | (Horas_Extra_Trabajadas / Horas_Laborales_Normales) * 100 | Explicativa | Base de datos
 corporativa | Los empleados disfrutan de un equilibrio sano entre vida laboral y personal, evidenciado en la salida a tiempo. | Los empleados manifiestan agotamiento por la extensión constante de su jornada laboral regular. | Mantener las políticas de horarios establecidas. | Contratar personal de apoyo o redistribuir cargas en 48 horas. | <= 15% | >= 15.1% |
 | **Supuesto 3** | Variable_Tasa_Errores | (Total_Errores_Reportados / Total_Entregables) * 100 | Explicativa | Base de datos corporativa | Los clientes reciben productos/servicios con alta precisión, generando una percepción de calidad superior. | Los clientes experimentan frustración por devoluciones o reprocesos en los entregables. | Implementar un programa de recompensas por calidad. | Detener la línea de producción/servicio para reentrenamiento urgente. | <= 5% | >= 5.1% |
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
